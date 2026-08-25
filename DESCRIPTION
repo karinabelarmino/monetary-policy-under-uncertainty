@@ -1,0 +1,16 @@
+Package: monetarypolicyunderuncertainty
+Type: Project
+Title: Monetary Policy Under Uncertainty
+Version: 1.0.0
+Authors@R: c(
+    person("Karina Oliveira Belarmino de", "Almeida", role = c("aut", "cre")),
+    person("Wilson Luiz Rotatori", "Correa", role = "aut"),
+    person("Luckas Sabioni", "Lopes", role = "aut")
+  )
+Description: Research project on uncertainty, monetary policy credibility, and macroeconomic dynamics in Brazil using a Bayesian VAR with sign restrictions.
+License: MIT
+Encoding: UTF-8
+Imports:
+    BVAR (== 1.0.5),
+    coda,
+    vars

@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the published article."
+title: "Monetary Policy Under Uncertainty"
+type: software
+authors:
+  - family-names: "de Almeida"
+    given-names: "Karina Oliveira Belarmino"
+  - family-names: "Corrêa"
+    given-names: "Wilson Luiz Rotatori"
+  - family-names: "Lopes"
+    given-names: "Luckas Sabioni"
+version: 1.0.0
+date-released: 2026-08-25
+preferred-citation:
+  type: article
+  title: "Uncertainty, credibility and monetary policy in Brazil: A BVAR approach with sign restrictions"
+  authors:
+    - family-names: "de Almeida"
+      given-names: "Karina Oliveira Belarmino"
+    - family-names: "Corrêa"
+      given-names: "Wilson Luiz Rotatori"
+    - family-names: "Lopes"
+      given-names: "Luckas Sabioni"
+  journal: "Central Bank Review"
+  volume: 26
+  issue: 2
+  year: 2026
+  doi: "10.1016/j.cbrev.2026.100257"
