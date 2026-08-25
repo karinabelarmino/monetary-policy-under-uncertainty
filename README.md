@@ -28,9 +28,15 @@ str(data)
 range(data$date)
 ```
 
+Table 1 presents the variables included in the frozen analytical file, their notation in the published paper and their role in the current script.
+
+<p align="center">
+  <strong>Table 1.</strong> Variables included in the frozen analytical dataset
+</p>
+
 | Variable | Paper notation | Description | Use in the current script |
 | --- | --- | --- | --- |
-| `date` |  | Monthly reference date | Sample index |
+| `date` | Not applicable | Monthly reference date | Sample index |
 | `exp` | EXP | IPCA expectation accumulated 12 months ahead | Baseline |
 | `ghp` | GHP | Output gap estimated with the Hodrick-Prescott filter | Retained for extensions |
 | `gha` | GHA | Output gap estimated with Hamilton's approach | Baseline |
@@ -39,7 +45,11 @@ range(data$date)
 | `igi` | IGI | General Macroeconomic Uncertainty Indicator | Baseline |
 | `ci` | CI | Monetary policy credibility index | Baseline |
 
-The frozen file already covers January 2003 to June 2022 and contains only the analytical variables used in the research. 
+<p align="center">
+  <em>Source: Author's elaboration based on the frozen analytical file.</em>
+</p>
+
+The frozen file already covers January 2003 to June 2022 and contains only the analytical variables used in the research.
 
 ## Methodological choices
 
@@ -47,23 +57,88 @@ The baseline is a Bayesian Vector Autoregression with five endogenous variables 
 
 The prior follows the hierarchical Minnesota specification implemented in [`BVAR`](https://cran.r-project.org/package=BVAR), together with sum-of-coefficients and single-unit-root dummy priors. The package was developed by Nikolas Kuschnig and Lukas Vashold; its [source repository](https://github.com/nk027/bvar) and [companion article](https://doi.org/10.18637/jss.v100.i14) document the estimation framework. This structure provides shrinkage while allowing the degree of persistence to be informed by the data.
 
-Structural shocks are identified with the contemporaneous sign and zero restrictions reported in Table 2 of the article. Rows represent responding variables and columns represent structural shocks:
-
-| Response / shock | IGI | CI | GHA | EXP | SELIC |
-| --- | :---: | :---: | :---: | :---: | :---: |
-| IGI | + | NA | NA | NA | NA |
-| CI | NA | + | NA | NA | NA |
-| GHA | − | + | NA | NA | − |
-| EXP | + | − | NA | NA | − |
-| SELIC | 0 | 0 | NA | NA | + |
+Table 2 presents the contemporaneous sign and zero restrictions used to identify the structural shocks. These restrictions reproduce the identification scheme reported in Table 2 of the published article. Rows represent responding variables and columns represent structural shocks.
 
 <p align="center">
-  <img src="assets/sign-restriction-flow.png" width="100%" alt="Acceptance and rejection loop for zero- and sign-restricted BVAR identification">
+  <strong>Table 2.</strong> Contemporaneous sign and zero restrictions
 </p>
 
-*Identification sequence used in this reconstruction. The zero- and sign-restriction procedure follows [Arias, Rubio-Ramírez and Waggoner (2018)](https://doi.org/10.3982/ECTA14468), as implemented in the [`BVAR` package](https://github.com/nk027/bvar) by Kuschnig and Vashold. The empirical application follows [Almeida, Corrêa and Lopes (2026)](https://doi.org/10.1016/j.cbrev.2026.100257).*
+<table align="center">
+  <thead>
+    <tr>
+      <th>Response / shock</th>
+      <th align="center">IGI</th>
+      <th align="center">CI</th>
+      <th align="center">GHA</th>
+      <th align="center">EXP</th>
+      <th align="center">SELIC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>IGI</td>
+      <td align="center">+</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+    </tr>
+    <tr>
+      <td>CI</td>
+      <td align="center">NA</td>
+      <td align="center">+</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+    </tr>
+    <tr>
+      <td>GHA</td>
+      <td align="center">−</td>
+      <td align="center">+</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+      <td align="center">−</td>
+    </tr>
+    <tr>
+      <td>EXP</td>
+      <td align="center">+</td>
+      <td align="center">−</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+      <td align="center">−</td>
+    </tr>
+    <tr>
+      <td>SELIC</td>
+      <td align="center">0</td>
+      <td align="center">0</td>
+      <td align="center">NA</td>
+      <td align="center">NA</td>
+      <td align="center">+</td>
+    </tr>
+  </tbody>
+</table>
 
-The identification routine first obtains a posterior draw of the reduced-form parameters and its covariance matrix. It then computes the lower-triangular Cholesky factor. Conditional on that draw, the routine proposes an orthogonal rotation and constructs a candidate structural impact matrix. If the candidate satisfies all contemporaneous zero and sign restrictions, the structural draw is retained and used to compute the IRFs and FEVD. Otherwise, the candidate rotation is discarded and another rotation is attempted for the same posterior draw. The rotation search limit is set to 60,000 attempts.
+<p align="center">
+  <em>Source: Almeida, Corrêa and Lopes (2026), Table 2.</em><br>
+  <em>Note: +, − and 0 denote positive, negative and zero restrictions, respectively; NA denotes an unrestricted response.</em>
+</p>
+
+The identification sequence used in this reconstruction follows [Arias, Rubio-Ramírez and Waggoner (2018)](https://doi.org/10.3982/ECTA14468), as implemented in the [`BVAR` package](https://github.com/nk027/bvar) by Kuschnig and Vashold. The empirical application follows [Almeida, Corrêa and Lopes (2026)](https://doi.org/10.1016/j.cbrev.2026.100257).
+
+The identification routine first obtains a posterior draw of the reduced-form parameters and its covariance matrix. It then computes the lower-triangular Cholesky factor. Conditional on that draw, the routine proposes an orthogonal rotation and constructs a candidate structural impact matrix. If the candidate satisfies all contemporaneous zero and sign restrictions, the structural draw is retained and used to compute the IRFs and FEVD. Otherwise, the candidate rotation is discarded and another rotation is attempted for the same posterior draw. The rotation search limit is set to 60,000 attempts. This procedure is visually summarized in Figure 1.
+
+<p align="center">
+  <img
+    src="assets/sign-restriction-flow.png"
+    width="550"
+    alt="Sign-restricted BVAR identification algorithm"
+  >
+</p>
+
+<p align="center">
+  <strong>Figure 1.</strong> Simplified representation of the identification algorithm implemented in the <code>BVAR</code> package.<br>
+  <em>Source: Author's elaboration.</em>
+</p>
 
 This structural search is distinct from the Metropolis-Hastings step used for the prior hyperparameters. The script reports the Geweke diagnostic and its two-sided p-values for `lambda` and `alpha`. The impulse responses are summarized with 90% and 68% posterior credible regions.
 
@@ -78,9 +153,9 @@ The published results and the current two-lag estimation support four main inter
 
 ## Limitations
 
-- The results remain conditional on the sample, prior, lag order and identifying restrictions
-- Sign restrictions identify a set of admissible structural models rather than one unique model. 
-- Random orthogonal rotations and changes in the implementation of the identification algorithm can also generate numerical differences across computational environments.
+- The results remain conditional on the sample, prior, lag order and identifying restrictions.
+- Sign restrictions identify a set of admissible structural models rather than one unique model.
+- Random orthogonal rotations and changes in the implementation of the identification algorithm can generate numerical differences across computational environments.
 - The current system does not include an external block or fiscal variables. Adding variables increases the reduced-form parameter space and the dimension of the structural identification problem. With the computational resources available during the original research, a larger system was not practical.
 
 My doctoral research continues this agenda in MATLAB, incorporating external and fiscal information that could not be treated jointly in the published specification. Additional exercises planned for this repository include sensitivity to alternative priors and an assessment of the `bsvarSIGNs` package.
@@ -116,15 +191,22 @@ The script is organized into:
 ## Repository structure
 
 ```text
-data/                         Frozen RData file, dictionary and source documentation
-CITATION.cff                  Citation metadata
-DESCRIPTION                   Project metadata and R dependencies
-replicate.R                   Baseline estimation and individual IRF commands
+.
+├── assets/
+│   └── sign-restriction-flow.png    Figure 1: identification algorithm
+├── data/
+│   ├── DATA_SOURCES.md              Data dictionary and source documentation
+│   └── monetary_policy_data.RData   Frozen analytical dataset
+├── CITATION.cff                     Citation metadata
+├── DESCRIPTION                      Project metadata and R dependencies
+├── LICENSE                          MIT License
+├── README.md                        Project documentation
+└── replicate.R                      Baseline estimation and individual IRF commands
 ```
 
-## Credits and funding 
+## Credits and funding
 
-The published paper was coauthored by Karina Oliveira Belarmino de Almeida, Wilson Luiz Rotatori Corrêa (advisor) and Luckas Sabioni Lopes (coadvisor). 
+The published paper was coauthored by Karina Oliveira Belarmino de Almeida, Wilson Luiz Rotatori Corrêa (advisor) and Luckas Sabioni Lopes (coadvisor).
 
 The research received support from FAPEMIG through a Researcher in Science, Technology and Innovation Development scholarship, BDCTI-IV.
 
