@@ -1,0 +1,7 @@
+Mode: release
+Holdout: 2019-07-01 to 2022-06-01
+One-step forecasts: 36
+Winner: Minnesota: random-walk mean
+Winner standardized CRPS: 0.207097
+Published baseline rank: 5
+Structural comparison generated: TRUE

@@ -9,8 +9,9 @@ authors:
     given-names: "Wilson Luiz Rotatori"
   - family-names: "Lopes"
     given-names: "Luckas Sabioni"
-version: 1.0.0
-date-released: 2026-08-25
+version: 1.1.0
+date-released: 2026-08-31
+repository-code: "https://github.com/karinabelarmino/monetary-policy-under-uncertainty"
 preferred-citation:
   type: article
   title: "Uncertainty, credibility and monetary policy in Brazil: A BVAR approach with sign restrictions"
