@@ -1,0 +1,9 @@
+"prior_id","diagnostic","label","engine","standardized_rmse","standardized_mae","standardized_crps","coverage_68","coverage_90","rank_rmse","rank_mae","rank_crps","mean_rank","overall_rank","rank_rmse_diagnostic","rank_mae_diagnostic","rank_crps_diagnostic","mean_rank_diagnostic","diagnostic_rank"
+"mn_zero_mean","1 - Minnesota specification","Minnesota: zero mean","BVAR",0.426577875292624,0.242365195352889,0.206893893370302,0.283333333333333,0.466666666666667,1,5,3,3,3,1,3,1,1.66666666666667,1
+"mn_random_walk","1 - Minnesota specification","Minnesota: random-walk mean","BVAR",0.431887789917487,0.240910618897222,0.207311297898676,0.288888888888889,0.461111111111111,4,2,4,3.33333333333333,4,2,1,2,1.66666666666667,2
+"mn_sur","1 - Minnesota specification","Minnesota + SUR","BVAR",0.437626975429404,0.242197307528585,0.208746849275577,0.288888888888889,0.477777777777778,5,4,5,4.66666666666667,5,3,2,3,2.66666666666667,3
+"mn_soc","1 - Minnesota specification","Minnesota + SOC","BVAR",0.451716295577847,0.248850969871375,0.214476116808295,0.272222222222222,0.416666666666667,6,6,6,6,6,4,4,4,4,4
+"published_baseline","1 - Minnesota specification","Published baseline: MN + SOC + SUR","BVAR",0.455262026809834,0.249411566164292,0.215238916019068,0.266666666666667,0.416666666666667,7,7,7,7,7,5,5,5,5,5
+"ssvs","2 - Alternative prior families","SSVS spike-and-slab","custom_gibbs",0.427207357171012,0.231073856832708,0.184271415648543,0.711111111111111,0.833333333333333,2,1,1,1.33333333333333,1,1,1,1,1,1
+"normal_wishart","2 - Alternative prior families","Independent Normal-Wishart","custom_gibbs",0.430367714820089,0.241794206594213,0.188263152627778,0.705555555555556,0.833333333333333,3,3,2,2.66666666666667,2,2,2,2,2,2
+"published_baseline","2 - Alternative prior families","Published baseline: MN + SOC + SUR","BVAR",0.455262026809834,0.249411566164292,0.215238916019068,0.266666666666667,0.416666666666667,7,7,7,7,7,3,3,3,3,3
