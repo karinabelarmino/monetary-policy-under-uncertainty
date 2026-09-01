@@ -65,7 +65,7 @@ Requirements:
 Run the publication workflow:
 
 ```bash
-Rscript publication-replication/replicate.R
+Rscript replication/replicate.R
 ```
 
 Run both prior diagnostics:
