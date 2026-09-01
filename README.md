@@ -6,11 +6,11 @@ The starting point is [*Uncertainty, credibility and monetary policy in Brazil: 
 
 ## Project map
 
-| Module | Analytical question | Main evidence | Status |
-| --- | --- | --- | :---: |
-| [Central Bank Review publication replication](replication/) | Can the published five-variable BVAR be transparently reconstructed with the frozen data and `BVAR` 1.0.5? | Baseline estimation, convergence diagnostics and sign-restricted IRFs | Published workflow |
-| [Prior sensitivity](extensions/prior-sensitivity/) | How sensitive is the baseline to Minnesota specifications and to non-Minnesota prior families? | Two diagnostics, 36 one-step forecasts, posterior checks and structural sensitivity | Local validation candidate |
-| `bsvarSIGNs` assessment | How portable are the model and identification scheme to another sign-restricted BVAR implementation? | Cross-package specification and output comparison | Planned |
+| Module                                                      | Analytical question                                                                                        | Main evidence                                                                       |                                                     Status                                                    |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | :-----------------------------------------------------------------------------------------------------------: |
+| [Central Bank Review publication replication](replication/) | Can the published five-variable BVAR be transparently reconstructed with the frozen data and `BVAR` 1.0.5? | Baseline estimation, convergence diagnostics and sign-restricted IRFs               |                                               Published workflow                                              |
+| [Prior sensitivity](extensions/prior-sensitivity/)          | How sensitive is the baseline to Minnesota specifications and to non-Minnesota prior families?             | Two diagnostics, 36 one-step forecasts, posterior checks and structural sensitivity | [Released · v1.1.0](https://github.com/karinabelarmino/monetary-policy-under-uncertainty/releases/tag/v1.1.0) |
+| `bsvarSIGNs` assessment                                     | How portable are the model and identification scheme to another sign-restricted BVAR implementation?       | Cross-package specification and output comparison                                   |                                                    Planned                                                    |
 
 ## Prior-sensitivity extension
 
@@ -19,7 +19,7 @@ The extension separates two questions that should not be conflated:
 1. **Within-Minnesota sensitivity:** prior mean and SOC/SUR dummy-prior choices.
 2. **Across-family sensitivity:** independent Normal-Wishart and SSVS spike-and-slab priors.
 
-The data, five-variable system, two lags, Gaussian likelihood and published sign and zero restrictions remain fixed. Across 36 expanding one-step forecasts from July 2019 to June 2022, the zero-mean Minnesota is the strongest Minnesota specification, while SSVS provides the best aggregate performance among all tested alternatives.
+The data, five-variable system, two lags, Gaussian likelihood and published sign and zero restrictions remain fixed. Across 36 expanding one-step-ahead forecasts from July 2019 to June 2022, the zero-mean Minnesota is the strongest Minnesota specification, while SSVS provides the best aggregate performance among all tested alternatives.
 
 Relative to the published baseline, SSVS reduces standardized CRPS by 14.4%, MAE by 7.4% and RMSE by 6.2%. Its predictive intervals also have substantially better empirical coverage. These are conditional forecasting results, not evidence that the prior used for the structural publication was incorrect.
 
@@ -42,25 +42,25 @@ See [`data/DATA_SOURCES.md`](data/DATA_SOURCES.md) for the data dictionary and s
 │       ├── outputs/                     Generated tables and figures
 │       ├── prior_sensitivity.R          Both prior diagnostics in one script
 │       └── README.md                    Methods, results and interpretation
-├── replication/                         Article-linked reconstruction
-├── social/                              Draft professional communication
+├── replication/
+│   ├── replicate.R                      Article-linked reconstruction
+│   └── README.md                        Publication workflow documentation
 ├── CITATION.cff                         Citation metadata
 ├── DESCRIPTION                          R dependencies
 ├── LICENSE                              MIT License
-├── replicate.R                          Backward-compatible replication entry point
 └── README.md                            Project-level navigation
 ```
 
-This structure is preferable to placing every file in a long publication-named folder: it keeps the root concise, gives the article workflow a stable home, and leaves a predictable `extensions/<exercise>/` path for future work. The root-level `replicate.R` is retained as a backward-compatible entry point.
+This structure keeps the repository root concise, gives the article workflow a stable home and provides a predictable `extensions/<exercise>/` path for post-publication analyses.
 
 ## Reproducibility
 
 Requirements:
 
-- R 4.3 or newer
-- `BVAR` 1.0.5
-- `coda`
-- `vars`
+* R 4.3 or newer
+* `BVAR` 1.0.5
+* `coda`
+* `vars`
 
 Run the publication workflow:
 
